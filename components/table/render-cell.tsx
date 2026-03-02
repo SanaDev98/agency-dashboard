@@ -1,14 +1,38 @@
+"use client";
 import { User, Tooltip, Chip } from "@nextui-org/react";
 import React from "react";
 import { DeleteIcon } from "../icons/table/delete-icon";
 import { EditIcon } from "../icons/table/edit-icon";
 import { EyeIcon } from "../icons/table/eye-icon";
-import { users } from "./data";
+import { candidates } from "@/data/mockData";
+import Link from "next/link";
+
+type Candidate = (typeof candidates)[number];
 
 interface Props {
-  user: (typeof users)[number];
+  user: Candidate;
   columnKey: string | React.Key;
 }
+
+const statusColor = (s: string) => {
+  const map: Record<string, "primary" | "warning" | "success" | "danger" | "default" | "secondary"> = {
+    Lead: "default",
+    Interview: "secondary",
+    Medical: "warning",
+    "Visa Processing": "primary",
+    SLBFE: "secondary",
+    "Flight Ready": "success",
+    Departed: "success",
+  };
+  return map[s] ?? "default";
+};
+
+const medicalColor = (m: string) => {
+  if (m === "Passed") return "success";
+  if (m === "Failed") return "danger";
+  if (m === "Re-test") return "warning";
+  return "default";
+};
 
 export const RenderCell = ({ user, columnKey }: Props) => {
   // @ts-ignore
@@ -17,66 +41,68 @@ export const RenderCell = ({ user, columnKey }: Props) => {
     case "name":
       return (
         <User
-          avatarProps={{
-            src: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-          }}
-          name={cellValue}
-        >
-          {user.email}
-        </User>
+          avatarProps={{ src: user.avatar }}
+          name={user.name}
+          description={
+            <span className="text-xs text-default-400">🛂 {user.passport}</span>
+          }
+        />
       );
-    case "role":
+    case "job":
       return (
         <div>
-          <div>
-            <span>{cellValue}</span>
-          </div>
-          <div>
-            <span>{user.team}</span>
-          </div>
+          <div className="text-sm font-medium">{user.jobApplied}</div>
+          <div className="text-xs text-default-400">{user.country}</div>
         </div>
       );
-    case "status":
+    case "category":
       return (
         <Chip
           size="sm"
           variant="flat"
           color={
-            cellValue === "active"
+            user.category === "Skilled"
               ? "success"
-              : cellValue === "paused"
-              ? "danger"
-              : "warning"
+              : user.category === "Semi-Skilled"
+                ? "secondary"
+                : "default"
           }
         >
-          <span className="capitalize text-xs">{cellValue}</span>
+          {user.category}
         </Chip>
       );
-
+    case "status":
+      return (
+        <Chip size="sm" variant="flat" color={statusColor(user.status)}>
+          <span className="capitalize text-xs">{user.status}</span>
+        </Chip>
+      );
+    case "medical":
+      return (
+        <Chip size="sm" variant="flat" color={medicalColor(user.medicalStatus)}>
+          <span className="text-xs">{user.medicalStatus}</span>
+        </Chip>
+      );
     case "actions":
       return (
-        <div className="flex items-center gap-4 ">
+        <div className="flex items-center gap-4">
           <div>
-            <Tooltip content="Details">
-              <button onClick={() => console.log("View user", user.id)}>
+            <Tooltip content="View Progress">
+              <Link href="/progress">
                 <EyeIcon size={20} fill="#979797" />
-              </button>
+              </Link>
             </Tooltip>
           </div>
           <div>
-            <Tooltip content="Edit user" color="secondary">
-              <button onClick={() => console.log("Edit user", user.id)}>
+            <Tooltip content="Edit Candidate" color="secondary">
+              <button onClick={() => console.log("Edit", user.id)}>
                 <EditIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
           <div>
-            <Tooltip
-              content="Delete user"
-              color="danger"
-              onClick={() => console.log("Delete user", user.id)}
-            >
-              <button>
+            <Tooltip content="Remove" color="danger">
+              <button onClick={() => console.log("Delete", user.id)}>
                 <DeleteIcon size={20} fill="#FF0080" />
               </button>
             </Tooltip>

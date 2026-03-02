@@ -1,49 +1,36 @@
-import { Card, CardBody } from "@nextui-org/react";
+import { Card, CardBody, Chip } from "@nextui-org/react";
 import React from "react";
-import { Community } from "../icons/community";
+import { dashboardStats } from "@/data/mockData";
 
 export const CardBalance2 = () => {
   return (
-    <Card className="xl:max-w-sm bg-default-50 rounded-xl shadow-md px-3 w-full">
+    <Card className="xl:max-w-sm bg-warning rounded-xl shadow-md px-3 w-full">
       <CardBody className="py-5">
-        <div className="flex gap-2.5">
-          <Community />
+        <div className="flex gap-2.5 items-center">
+          <span className="text-3xl">🏥</span>
           <div className="flex flex-col">
-            <span className="text-default-900">Health Insurance</span>
-            <span className="text-default-900 text-xs">+2400 People</span>
+            <span className="text-white font-semibold">Pending Medicals</span>
+            <span className="text-white text-xs opacity-80">Awaiting Clearance</span>
           </div>
         </div>
         <div className="flex gap-2.5 py-2 items-center">
-          <span className="text-default-900 text-xl font-semibold">
-            $12,138
-          </span>
-          <span className="text-danger text-xs">- 4.5%</span>
+          <span className="text-white text-3xl font-bold">{dashboardStats.pendingMedicals}</span>
+          <Chip size="sm" className="bg-white/20 text-white text-xs">Action Required</Chip>
         </div>
         <div className="flex items-center gap-6">
           <div>
             <div>
-              <span className="font-semibold text-success-600 text-xs">
-                {"↓"}
-              </span>
-              <span className="text-xs">11,930</span>
+              <span className="font-semibold text-white text-xs">{"⚠"}</span>
+              <span className="text-xs text-white"> 1 Re-test</span>
             </div>
-            <span className="text-default-900 text-xs">USD</span>
+            <span className="text-white text-xs">Critical</span>
           </div>
-
           <div>
             <div>
-              <span className="font-semibold text-danger text-xs">{"↑"}</span>
-              <span className="text-xs">54,120</span>
+              <span className="font-semibold text-white text-xs">{"⏳"}</span>
+              <span className="text-xs text-white"> 4 Scheduled</span>
             </div>
-            <span className="text-default-900 text-xs">USD</span>
-          </div>
-
-          <div>
-            <div>
-              <span className="font-semibold text-danger text-xs">{"⭐"}</span>
-              <span className="text-xs">150</span>
-            </div>
-            <span className="text-default-900 text-xs">VIP</span>
+            <span className="text-white text-xs">Upcoming</span>
           </div>
         </div>
       </CardBody>
