@@ -15,6 +15,10 @@ import {
     RadioGroup,
     Radio,
     Tooltip,
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
 } from "@nextui-org/react";
 import Link from "next/link";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
@@ -356,19 +360,26 @@ export const CandidateProgressPage = () => {
                         End-to-end pipeline management — data entry, documents & media for each step.
                     </p>
                 </div>
-                <div className="min-w-[260px]">
-                    <label className="text-xs text-default-500 mb-1 block">Select Candidate</label>
-                    <select
-                        value={selectedId}
-                        onChange={(e) => setSelectedId(e.target.value)}
-                        className="w-full px-3 py-2 rounded-xl border border-default-200 bg-default-50 text-sm text-default-800 focus:outline-none focus:border-primary"
-                    >
-                        {candidates.map((c) => (
-                            <option key={c.id} value={c.id}>
-                                {c.name} — {c.passport}
-                            </option>
-                        ))}
-                    </select>
+                <div className="min-w-[260px] flex flex-col gap-1">
+                    <label className="text-xs text-default-500">Select Candidate</label>
+                    <Dropdown>
+                        <DropdownTrigger>
+                            <Button
+                                variant="bordered"
+                                className="w-full justify-between font-normal text-sm"
+                                endContent={<span className="text-default-400 text-xs">▼</span>}
+                            >
+                                {candidate.name} — {candidate.passport}
+                            </Button>
+                        </DropdownTrigger>
+                        <DropdownMenu aria-label="Candidates" className="max-h-64 overflow-y-auto">
+                            {candidates.map((c) => (
+                                <DropdownItem key={c.id} onPress={() => setSelectedId(c.id)}>
+                                    {c.name} — {c.passport}
+                                </DropdownItem>
+                            ))}
+                        </DropdownMenu>
+                    </Dropdown>
                 </div>
             </div>
 
@@ -476,17 +487,25 @@ export const CandidateProgressPage = () => {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                             <Input label="Job Applied" value={leadData.jobApplied} onValueChange={(v) => setLeadData((p) => ({ ...p, jobApplied: v }))} size="sm" />
                             <Input label="Destination Country" value={leadData.country} onValueChange={(v) => setLeadData((p) => ({ ...p, country: v }))} size="sm" />
-                            <div>
-                                <label className="text-xs text-default-500 mb-1 block">Category</label>
-                                <select
-                                    value={leadData.category}
-                                    onChange={(e) => setLeadData((p) => ({ ...p, category: e.target.value as any }))}
-                                    className="w-full px-3 py-2 rounded-xl border border-default-200 bg-default-50 text-sm focus:outline-none focus:border-primary"
-                                >
-                                    <option value="Skilled">Skilled</option>
-                                    <option value="Semi-Skilled">Semi-Skilled</option>
-                                    <option value="Unskilled">Unskilled</option>
-                                </select>
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs text-default-500">Category</label>
+                                <Dropdown>
+                                    <DropdownTrigger>
+                                        <Button
+                                            variant="bordered"
+                                            size="sm"
+                                            className="w-full justify-between font-normal text-sm"
+                                            endContent={<span className="text-default-400 text-xs">▼</span>}
+                                        >
+                                            {leadData.category}
+                                        </Button>
+                                    </DropdownTrigger>
+                                    <DropdownMenu aria-label="Category">
+                                        <DropdownItem key="Skilled" onPress={() => setLeadData((p) => ({ ...p, category: "Skilled" as any }))}>Skilled</DropdownItem>
+                                        <DropdownItem key="Semi-Skilled" onPress={() => setLeadData((p) => ({ ...p, category: "Semi-Skilled" as any }))}>Semi-Skilled</DropdownItem>
+                                        <DropdownItem key="Unskilled" onPress={() => setLeadData((p) => ({ ...p, category: "Unskilled" as any }))}>Unskilled</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
                             </div>
                         </div>
                     </Section>
@@ -518,18 +537,31 @@ export const CandidateProgressPage = () => {
                 <div className="flex flex-col gap-6">
                     <Section title="Interview Scheduling">
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-                            <div>
-                                <label className="text-xs text-default-500 mb-1 block">Interview Type</label>
-                                <select
-                                    value={interviewData.type}
-                                    onChange={(e) => setInterviewData((p) => ({ ...p, type: e.target.value }))}
-                                    className="w-full px-3 py-2 rounded-xl border border-default-200 bg-default-50 text-sm focus:outline-none focus:border-primary"
-                                >
-                                    <option value="zoom">📹 Zoom (Video)</option>
-                                    <option value="inperson">🏢 In-Person</option>
-                                    <option value="phone">📞 Phone Call</option>
-                                    <option value="employer">🏭 Employer Visit</option>
-                                </select>
+                            <div className="flex flex-col gap-1">
+                                <label className="text-xs text-default-500">Interview Type</label>
+                                <Dropdown>
+                                    <DropdownTrigger>
+                                        <Button
+                                            variant="bordered"
+                                            size="sm"
+                                            className="w-full justify-between font-normal text-sm"
+                                            endContent={<span className="text-default-400 text-xs">▼</span>}
+                                        >
+                                            {{
+                                                zoom: "📹 Zoom (Video)",
+                                                inperson: "🏢 In-Person",
+                                                phone: "📞 Phone Call",
+                                                employer: "🏭 Employer Visit",
+                                            }[interviewData.type] ?? "Select type"}
+                                        </Button>
+                                    </DropdownTrigger>
+                                    <DropdownMenu aria-label="Interview Type">
+                                        <DropdownItem key="zoom" onPress={() => setInterviewData((p) => ({ ...p, type: "zoom" }))}>📹 Zoom (Video)</DropdownItem>
+                                        <DropdownItem key="inperson" onPress={() => setInterviewData((p) => ({ ...p, type: "inperson" }))}>🏢 In-Person</DropdownItem>
+                                        <DropdownItem key="phone" onPress={() => setInterviewData((p) => ({ ...p, type: "phone" }))}>📞 Phone Call</DropdownItem>
+                                        <DropdownItem key="employer" onPress={() => setInterviewData((p) => ({ ...p, type: "employer" }))}>🏭 Employer Visit</DropdownItem>
+                                    </DropdownMenu>
+                                </Dropdown>
                             </div>
                             <Input label="Scheduled Date" type="date" value={interviewData.scheduledDate} onValueChange={(v) => setInterviewData((p) => ({ ...p, scheduledDate: v }))} size="sm" />
                             <Input label="Scheduled Time" type="time" value={interviewData.scheduledTime} onValueChange={(v) => setInterviewData((p) => ({ ...p, scheduledTime: v }))} size="sm" />

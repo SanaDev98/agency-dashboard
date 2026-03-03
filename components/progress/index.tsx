@@ -7,6 +7,10 @@ import {
     Divider,
     Switch,
     Button,
+    Dropdown,
+    DropdownTrigger,
+    DropdownMenu,
+    DropdownItem,
 } from "@nextui-org/react";
 import Link from "next/link";
 import { HouseIcon } from "@/components/icons/breadcrumb/house-icon";
@@ -63,19 +67,26 @@ export const ProgressPage = () => {
             <h3 className="text-xl font-semibold">Candidate Progress Tracker</h3>
 
             {/* Candidate Selector */}
-            <div className="max-w-sm">
-                <label className="text-xs text-default-500 mb-1 block">Select Candidate</label>
-                <select
-                    value={selectedId}
-                    onChange={(e) => setSelectedId(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-default-200 bg-default-50 text-sm text-default-800 focus:outline-none focus:border-primary"
-                >
-                    {candidates.map((c) => (
-                        <option key={c.id} value={c.id}>
-                            {c.name} — {c.passport}
-                        </option>
-                    ))}
-                </select>
+            <div className="max-w-sm flex flex-col gap-1">
+                <label className="text-xs text-default-500">Select Candidate</label>
+                <Dropdown className="w-full">
+                    <DropdownTrigger>
+                        <Button
+                            variant="bordered"
+                            className="w-full justify-between font-normal text-sm"
+                            endContent={<span className="text-default-400 text-xs">▼</span>}
+                        >
+                            {candidate.name} — {candidate.passport}
+                        </Button>
+                    </DropdownTrigger>
+                    <DropdownMenu aria-label="Candidates" className="max-h-64 overflow-y-auto">
+                        {candidates.map((c) => (
+                            <DropdownItem key={c.id} onPress={() => setSelectedId(c.id)}>
+                                {c.name} — {c.passport}
+                            </DropdownItem>
+                        ))}
+                    </DropdownMenu>
+                </Dropdown>
             </div>
 
             {/* Candidate Header */}
