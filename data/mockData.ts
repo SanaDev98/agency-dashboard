@@ -415,7 +415,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-001",
         country: "Qatar",
-        flag: "🇶🇦",
+        flag: "qa",
         position: "Heavy Vehicle Driver",
         categoryLevel1: "Transport",
         categoryLevel2: "Driving",
@@ -439,7 +439,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-002",
         country: "Saudi Arabia",
-        flag: "🇸🇦",
+        flag: "sa",
         position: "Construction Worker",
         categoryLevel1: "Construction",
         categoryLevel2: "General Labour",
@@ -463,7 +463,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-003",
         country: "UAE",
-        flag: "🇦🇪",
+        flag: "ae",
         position: "Machine Operator",
         categoryLevel1: "Manufacturing",
         categoryLevel2: "Operations",
@@ -487,7 +487,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-004",
         country: "Romania",
-        flag: "🇷🇴",
+        flag: "ro",
         position: "Welder (MIG/TIG)",
         categoryLevel1: "Construction",
         categoryLevel2: "Skilled Trades",
@@ -511,7 +511,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-005",
         country: "Bahrain",
-        flag: "🇧🇭",
+        flag: "bh",
         position: "Security Guard",
         categoryLevel1: "Security",
         categoryLevel2: "Guard Services",
@@ -535,7 +535,7 @@ export const jobOrders: JobOrder[] = [
     {
         id: "JO-006",
         country: "Kuwait",
-        flag: "🇰🇼",
+        flag: "kw",
         position: "Electrician",
         categoryLevel1: "Construction",
         categoryLevel2: "Electrical",
