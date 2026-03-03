@@ -6,8 +6,6 @@ import { CardBalance2 } from "./card-balance2";
 import { CardBalance3 } from "./card-balance3";
 import { CardAgents } from "./card-agents";
 import { CardTransactions } from "./card-transactions";
-import { Link } from "@nextui-org/react";
-import NextLink from "next/link";
 
 export const Content = () => (
   <div className="h-full lg:px-6">
@@ -26,7 +24,7 @@ export const Content = () => (
         {/* Candidate Table */}
         <div className="h-full flex flex-col gap-2">
           <h3 className="text-xl font-semibold">Candidate Pipeline</h3>
-          <div className="w-full bg-default-50 shadow-lg rounded-2xl p-4">
+          <div className="w-full">
             <TableWrapper />
           </div>
         </div>
@@ -42,19 +40,5 @@ export const Content = () => (
       </div>
     </div>
 
-    {/* Quick Links */}
-    <div className="flex flex-col justify-center w-full py-5 px-4 lg:px-0 max-w-[90rem] mx-auto gap-3">
-      <div className="flex flex-wrap justify-between">
-        <h3 className="text-center text-xl font-semibold">All Candidates</h3>
-        <Link
-          href="/candidates"
-          as={NextLink}
-          color="primary"
-          className="cursor-pointer"
-        >
-          View Pipeline →
-        </Link>
-      </div>
-    </div>
   </div>
 );

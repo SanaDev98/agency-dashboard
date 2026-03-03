@@ -10,9 +10,9 @@ import { ProductsIcon } from "../icons/sidebar/products-icon";
 import { ReportsIcon } from "../icons/sidebar/reports-icon";
 import { SidebarItem } from "./sidebar-item";
 import { SidebarMenu } from "./sidebar-menu";
-import { FilterIcon } from "../icons/sidebar/filter-icon";
 import { useSidebarContext } from "../layout/layout-context";
 import { SettingsIcon } from "../icons/sidebar/settings-icon";
+import { DarkModeSwitch } from "../navbar/darkmodeswitch";
 import { usePathname } from "next/navigation";
 
 export const SidebarWrapper = () => {
@@ -91,9 +91,9 @@ export const SidebarWrapper = () => {
                 <SettingsIcon />
               </div>
             </Tooltip>
-            <Tooltip content={"Adjustments"} color="primary">
+            <Tooltip content={"Toggle Theme"} color="primary">
               <div className="max-w-fit">
-                <FilterIcon />
+                <DarkModeSwitch />
               </div>
             </Tooltip>
             <Tooltip content={"Profile"} color="primary">
