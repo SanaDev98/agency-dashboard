@@ -14,7 +14,7 @@ export const Register = () => {
 
   const initialValues: RegisterFormType = {
     name: "Acme",
-    email: "admin@acme.com",
+    email: "admin@agency.com",
     password: "admin",
     confirmPassword: "admin",
   };
