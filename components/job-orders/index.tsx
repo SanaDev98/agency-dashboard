@@ -410,7 +410,7 @@ export const JobOrders = () => {
                                             isInvalid={!!errors.flag}
                                             errorMessage={errors.flag}
                                             selectedKeys={form.flag ? [form.flag] : []}
-                                            onSelectionChange={(keys) => {
+                                            onSelectionChange={(keys: any) => {
                                                 const code = Array.from(keys)[0] as string;
                                                 const c = COUNTRIES.find((x) => x.code === code);
                                                 if (c) { set("flag", c.code); set("country", c.name); }
@@ -460,7 +460,7 @@ export const JobOrders = () => {
                                         <Select
                                             label="Status"
                                             selectedKeys={[form.status]}
-                                            onSelectionChange={(keys) =>
+                                            onSelectionChange={(keys: any) =>
                                                 set("status", Array.from(keys)[0] as string)
                                             }
                                         >
@@ -494,7 +494,7 @@ export const JobOrders = () => {
                                             isInvalid={!!errors.categoryLevel1}
                                             errorMessage={errors.categoryLevel1}
                                             selectedKeys={form.categoryLevel1 ? [form.categoryLevel1] : []}
-                                            onSelectionChange={(keys) =>
+                                            onSelectionChange={(keys: any) =>
                                                 set("categoryLevel1", Array.from(keys)[0] as string)
                                             }
                                         >
@@ -516,7 +516,7 @@ export const JobOrders = () => {
                                         <Select
                                             label="Skill Level"
                                             selectedKeys={[form.categoryLevel3]}
-                                            onSelectionChange={(keys) =>
+                                            onSelectionChange={(keys: any) =>
                                                 set("categoryLevel3", Array.from(keys)[0] as string)
                                             }
                                         >
@@ -585,7 +585,7 @@ export const JobOrders = () => {
                                         <Select
                                             label="Currency"
                                             selectedKeys={[form.currency]}
-                                            onSelectionChange={(keys) =>
+                                            onSelectionChange={(keys: any) =>
                                                 set("currency", Array.from(keys)[0] as string)
                                             }
                                         >
@@ -610,7 +610,7 @@ export const JobOrders = () => {
                                         <Select
                                             label="Gender"
                                             selectedKeys={[form.gender]}
-                                            onSelectionChange={(keys) =>
+                                            onSelectionChange={(keys: any) =>
                                                 set("gender", Array.from(keys)[0] as string)
                                             }
                                         >

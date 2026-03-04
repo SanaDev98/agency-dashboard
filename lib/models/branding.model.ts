@@ -1,4 +1,4 @@
-import mongoose, { Schema, model, models } from "mongoose";
+import mongoose, { Schema, Model } from "mongoose";
 
 export interface IBranding {
     slug: string;
@@ -17,5 +17,7 @@ const BrandingSchema = new Schema<IBranding>({
 });
 
 // Prevent model re-compilation during Next.js hot reload
-const Branding = models.Branding || model<IBranding>("Branding", BrandingSchema);
+// @ts-ignore
+const Branding: Model<IBranding> = mongoose.models["Branding"] || mongoose.model<IBranding>("Branding", BrandingSchema);
+
 export default Branding;
